@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        
+        /*
         stage('Build') {
             agent {
                 docker {
@@ -21,6 +21,7 @@ pipeline {
                 '''
             }
         }
+        */
         stage('Test') {
              agent {
                 docker {
@@ -49,20 +50,6 @@ pipeline {
                    node_modules/.bin/serve -s build &
                    sleep 10
                    npx playwright test
-                '''
-            }
-        }
-        stage('Deploy') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
-            steps {
-                sh '''
-                    npm install netlify-cli -g
-                    netlify --version
                 '''
             }
         }
